@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "description": "light version of Channel.",
   "main": "channel-light.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "dependencies": {},
+  "devDependencies": {
+    "aa": ">=0.1.32"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,8 @@
     "async-await"
   ],
   "author": "LightSpeedC",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
