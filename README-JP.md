@@ -3,7 +3,7 @@ channel-light
 
 `go` みたいなチャネル。
 
-[English](#README.md)
+[English](README.md)
 
 ```js
 void function () {

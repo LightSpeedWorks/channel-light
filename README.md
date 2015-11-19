@@ -3,7 +3,7 @@ channel-light
 
 `go` like Channel.
 
-[日本語](#README-JP.md)
+[日本語](README-JP.md)
 
 ```js
 void function () {
