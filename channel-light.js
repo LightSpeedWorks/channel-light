@@ -1,33 +1,26 @@
 void function () {
 	'use strict';
 
-	var slice = [].slice;
+	var push = Array.prototype.push;
 
 	// Channel
 	function Channel() {
-		var callbacks = slice.call(arguments), values = [];
+		var values = [], callbacks = Array.apply(null, arguments);
 		return function channel(first) {
-			try {
-				var args = slice.call(arguments);
-				if (typeof first === 'function')
-					args.forEach(function (func) {
-						if (values.length) func.apply(channel, values.shift());
-						else callbacks.push(func);
-					});
-				else if (first && typeof first.then === 'function')
-					first.then(channel, channel);
-				else {
-					if (first != null && !(first instanceof Error))
-						args = [null].concat(args);
-					if (args.length > 2) args = [args[0], args.slice(1)];
-					if (callbacks.length) callbacks.shift().apply(channel, args);
-					else values.push(args);
-				}
-			} catch (err) {
-				channel(err);
+			if (typeof first === 'function')
+				push.apply(callbacks, arguments);
+			else if (first && typeof first.then === 'function')
+				return first.then(channel, channel), channel;
+			else {
+				var args = arguments.length === 1 ? [first] : Array.apply(null, arguments);
+				if (!(first == null || first instanceof Error)) args.unshift(null);
+				values.push(args.length > 2 ? [args.shift(), args] : args);
 			}
+			while (callbacks.length && values.length)
+				try { callbacks.shift().apply(channel, values.shift()); }
+				catch (err) { values.unshift([err]); }
 			return channel;
-		}
+		};
 	}
 
 	if (typeof module === 'object' && module && module.exports)
