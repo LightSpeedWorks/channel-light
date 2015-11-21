@@ -3,7 +3,7 @@ channel-light
 
 `go`言語みたいなチャネル。CSPスタイルのチャネル。
 
-[English](README.md)
+[English](README.md#readme)
 
 
 ## 準備

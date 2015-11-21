@@ -3,7 +3,7 @@ channel-light
 
 `go`-language like Channel. CSP-style channel.
 
-[日本語](README-JP.md)
+[日本語](README-JP.md#readme)
 
 
 ## PREPARE
