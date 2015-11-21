@@ -74,6 +74,16 @@ channel(null, 'val2');
 channel(new Error('error'));
 ```
 
+コールバック引数の正規化を行う。
+
+```js
+channel('val1');           // -> callback(null, 'val1')
+channel('elem1', 'elem2'); // -> callback(null, ['elem1', 'elem2'])
+channel(0);                // -> callback(null, 0)
+channel(false);            // -> callback(null, false)
+channel(true);             // -> callback(null, true)
+```
+
 
 ## 例
 

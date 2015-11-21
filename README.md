@@ -75,6 +75,17 @@ channel(new Error('error'));
 ```
 
 
+normalize callback arguments.
+
+```js
+channel('val1');           // -> callback(null, 'val1')
+channel('elem1', 'elem2'); // -> callback(null, ['elem1', 'elem2'])
+channel(0);                // -> callback(null, 0)
+channel(false);            // -> callback(null, false)
+channel(true);             // -> callback(null, true)
+```
+
+
 ## QUICK EXAMPLE
 
 ```js
