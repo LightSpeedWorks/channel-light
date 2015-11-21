@@ -1,9 +1,81 @@
 channel-light
 ====
 
-`go` like Channel.
+`go`-language like Channel. CSP-style channel.
 
 [日本語](README-JP.md)
+
+
+## PREPARE
+
+```bash
+$ npm install channel-light --save
+```
+
+
+## USAGE
+
+### Channel = require('channel-light')
+
+prepare Channel.
+
+```js
+var Channel = require('channel-light');
+```
+
+### channel = new Channel(callback,...)
+
+make new channel.
+
+```js
+var channel = Channel();
+```
+
+make new channel with 3 callbacks.
+
+```js
+var channel = Channel(
+	function (err, val) {},
+	function (err, val) {},
+	function (err, val) {}
+);
+```
+
+#### callback(err, val)
+
+callback format. `this` is channel itself.
+
+```js
+function callback(err, val) {
+	// use `this` as channel.
+	// you can `throw` with error.
+}
+```
+
+### channel = channel(callback,...)
+
+add callback into channel for receive values.
+
+```js
+channel(function (err, val) {});
+channel(
+	function (err, val) {},
+	function (err, val) {}
+);
+```
+
+### channel = channel(err, val)
+
+send values into channel.
+
+```js
+channel(null, 'val1');
+channel(null, 'val2');
+channel(new Error('error'));
+```
+
+
+## QUICK EXAMPLE
 
 ```js
 void function () {
@@ -34,6 +106,16 @@ void function () {
 		console.log('c? ' + val);
 		console.log('end');
 	})();
+
+}();
+```
+
+```js
+void function () {
+	'use strict';
+
+	// Channel
+	var Channel = require('channel-light');
 
 	// you don't need variable that keep a channel.
 	Channel(function () {
@@ -74,5 +156,52 @@ void function () {
 	})();
 
 }();
-// see also npm:co-chan, npm:aa.Channel
 ```
+
+
+## EXAMPLE USING aa (async-await)
+
+```bash
+$ npm install aa channel-light
+```
+
+communicate with 2 threads.
+
+```js
+	var Channel = require('channel-light');
+	var aa = require('aa');
+
+	aa(function *() {
+		yield wait(100, 'a');
+		var chan1 = Channel(), chan2 = Channel();
+		yield [
+			function *() {
+				yield wait(100);
+				chan2(null, 'request message'); // send message
+				yield chan1; // receive message
+				yield wait(100);
+			},
+			function *() {
+				yield wait(200);
+				yield chan2; // receive message
+				yield wait(100);
+				chan1(null, 'response message'); // send message
+				yield wait(100);
+			}
+		];
+	});
+	function wait(ms, val) {
+		return function (cb) { setTimeout(cb, ms, null, val); };
+	}
+```
+
+
+## LICENSE
+
+  MIT
+
+
+## SEE ALSO
+
++ [npm: aa.Channel](https://www.npmjs.com/package/aa)
++ [npm: co-chan](https://www.npmjs.com/package/co-chan)

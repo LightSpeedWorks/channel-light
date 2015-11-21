@@ -1,6 +1,6 @@
 {
   "name": "channel-light",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "light version of Channel.",
   "main": "channel-light.js",
   "dependencies": {},
