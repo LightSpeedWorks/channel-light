@@ -9,6 +9,12 @@
 ## 準備
 
 ```bash
+$ npm i channel-light -S
+```
+
+または
+
+```bash
 $ npm install channel-light --save
 ```
 

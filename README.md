@@ -9,6 +9,12 @@
 ## PREPARE
 
 ```bash
+$ npm i channel-light -S
+```
+
+or
+
+```bash
 $ npm install channel-light --save
 ```
 
@@ -75,7 +81,6 @@ channel(null, 'val1');
 channel(null, 'val2');
 channel(new Error('error'));
 ```
-
 
 normalize callback arguments.
 
