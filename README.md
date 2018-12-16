@@ -12,8 +12,7 @@
 $ npm install channel-light --save
 ```
 
-[![NPM](https://nodei.co/npm/channel-light.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/channel-light/)
-[![NPM](https://nodei.co/npm-dl/channel-light.png?height=2)](https://nodei.co/npm/channel-light/)
+[![NPM](https://nodei.co/npm/channel-light.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/channel-light)
 
 
 ## USAGE
